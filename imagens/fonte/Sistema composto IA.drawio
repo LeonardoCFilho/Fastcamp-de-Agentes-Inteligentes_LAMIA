@@ -1,0 +1,69 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 OPR/113.0.0.0" version="29.6.1">
+  <diagram name="Page-1" id="6uNRa354vtzqn-KITPiv">
+    <mxGraphModel dx="905" dy="507" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="FFvMWmliwyVSPYnaHPCP-1" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=20;" value="Modelo&lt;div&gt;de IA&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="360" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="FFvMWmliwyVSPYnaHPCP-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Tool" vertex="1">
+          <mxGeometry height="60" width="120" x="200" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="FFvMWmliwyVSPYnaHPCP-3" edge="1" parent="1" source="FFvMWmliwyVSPYnaHPCP-1" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="FFvMWmliwyVSPYnaHPCP-2" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="320" y="560" />
+              <mxPoint x="260" y="520" />
+            </Array>
+            <mxPoint x="260" y="595" as="sourcePoint" />
+            <mxPoint x="160" y="515" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FFvMWmliwyVSPYnaHPCP-5" connectable="0" parent="FFvMWmliwyVSPYnaHPCP-3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Query" vertex="1">
+          <mxGeometry relative="1" x="-0.0547" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FFvMWmliwyVSPYnaHPCP-4" edge="1" parent="1" source="FFvMWmliwyVSPYnaHPCP-2" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="FFvMWmliwyVSPYnaHPCP-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="470" />
+              <mxPoint x="400" y="490" />
+            </Array>
+            <mxPoint x="510" y="530" as="sourcePoint" />
+            <mxPoint x="410" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FFvMWmliwyVSPYnaHPCP-8" connectable="0" parent="FFvMWmliwyVSPYnaHPCP-4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Contexto&lt;div&gt;Adicional&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="0.0607" y="-2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FFvMWmliwyVSPYnaHPCP-13" edge="1" parent="1" source="FFvMWmliwyVSPYnaHPCP-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="FFvMWmliwyVSPYnaHPCP-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="565" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FFvMWmliwyVSPYnaHPCP-15" connectable="0" parent="FFvMWmliwyVSPYnaHPCP-13" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Input" vertex="1">
+          <mxGeometry relative="1" x="-0.1285" y="2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FFvMWmliwyVSPYnaHPCP-14" edge="1" parent="1" source="FFvMWmliwyVSPYnaHPCP-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;startArrow=classic;startFill=1;" target="FFvMWmliwyVSPYnaHPCP-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FFvMWmliwyVSPYnaHPCP-17" connectable="0" parent="FFvMWmliwyVSPYnaHPCP-14" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Reposta" vertex="1">
+          <mxGeometry relative="1" x="-0.2166" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FFvMWmliwyVSPYnaHPCP-9" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="Usuário" vertex="1">
+          <mxGeometry height="60" width="30" x="550" y="420" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

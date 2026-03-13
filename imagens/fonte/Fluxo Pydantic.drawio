@@ -1,0 +1,43 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 OPR/113.0.0.0" version="29.6.1">
+  <diagram name="Page-1" id="rWEaWHElydsWLBp6NUmB">
+    <mxGraphModel dx="508" dy="760" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="RdvDbQdcmn3tqeqwbZkW-2" edge="1" parent="1" source="RdvDbQdcmn3tqeqwbZkW-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="RdvDbQdcmn3tqeqwbZkW-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RdvDbQdcmn3tqeqwbZkW-3" connectable="0" parent="RdvDbQdcmn3tqeqwbZkW-2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Leitura" vertex="1">
+          <mxGeometry relative="1" x="0.0125" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RdvDbQdcmn3tqeqwbZkW-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="String JSON" vertex="1">
+          <mxGeometry height="60" width="120" x="1040" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="RdvDbQdcmn3tqeqwbZkW-5" edge="1" parent="1" source="RdvDbQdcmn3tqeqwbZkW-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="RdvDbQdcmn3tqeqwbZkW-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RdvDbQdcmn3tqeqwbZkW-6" connectable="0" parent="RdvDbQdcmn3tqeqwbZkW-5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Validação&lt;br&gt;Pydantic" vertex="1">
+          <mxGeometry relative="1" x="-0.3769" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RdvDbQdcmn3tqeqwbZkW-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Dict Python" vertex="1">
+          <mxGeometry height="60" width="120" x="1240" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="RdvDbQdcmn3tqeqwbZkW-8" edge="1" parent="1" source="RdvDbQdcmn3tqeqwbZkW-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="RdvDbQdcmn3tqeqwbZkW-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RdvDbQdcmn3tqeqwbZkW-9" connectable="0" parent="RdvDbQdcmn3tqeqwbZkW-8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Serialização" vertex="1">
+          <mxGeometry relative="1" x="0.3846" y="1" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RdvDbQdcmn3tqeqwbZkW-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Objeto Pydantic" vertex="1">
+          <mxGeometry height="60" width="120" x="1140" y="560" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

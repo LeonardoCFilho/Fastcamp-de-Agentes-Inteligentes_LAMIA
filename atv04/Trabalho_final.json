@@ -1,0 +1,253 @@
+{
+  "name": "Trabalho final",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "daysInterval": 7
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "2ce08ad2-ce3a-40f1-bc58-f6d091b0d0a7",
+      "name": "Trigger semanal"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "limit": 500,
+        "filters": {
+          "receivedAfter": "={{ DateTime.fromISO($json.timestamp).minus({ days: 7 }).toISO() }}"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        220,
+        0
+      ],
+      "id": "72e5c79b-5037-4151-8e2e-1c983262b0ec",
+      "name": "Gmail",
+      "webhookId": "978170b7-2065-4ef5-92fc-29f3e15f23b9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "hlFaSOGDc5JTvOys",
+          "name": "Gmail account 14"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "include": "specifiedFields",
+        "fieldsToInclude": "snippet, From",
+        "options": {}
+      },
+      "id": "7521309d-b72c-4942-b890-f05b074fdece",
+      "name": "Organize Email Data - Morning",
+      "type": "n8n-nodes-base.aggregate",
+      "position": [
+        660,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e9cc7302-1979-4e1e-acaf-22d33fd5abce",
+              "leftValue": "={{ $json.To }}",
+              "rightValue": "=leonardo.cortes@discente.ufg.br",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "c81f76aa-c05e-41c5-a366-414239d572f8",
+              "leftValue": "={{ $json.From }}",
+              "rightValue": "SECOM - UFG",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        440,
+        0
+      ],
+      "id": "43c05c08-0452-46ba-8768-1597f0a7514f",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "subject": "Resumo semanal",
+        "message": "={{ $json.text }}",
+        "toList": [
+          "=leonardo.cortes@discente.ufg.br"
+        ],
+        "additionalFields": {}
+      },
+      "id": "42d58096-e19e-4dfa-a2c9-821b3afe5640",
+      "name": "Send Email Response",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 1,
+      "position": [
+        1256,
+        0
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "hlFaSOGDc5JTvOys",
+          "name": "Gmail account 14"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        900,
+        220
+      ],
+      "id": "2dae9782-c7de-4dcb-a402-a768e6d860aa",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "jbHb0WEVXoR49oeN",
+          "name": "Groq account 22"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Você fará um resumo de uma lista que representa os emails semanais",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=Leia atentamente o resumo dos emails abaixo. Identifique todos os pontos principais mencionados, quaisquer problemas específicos a serem observados e ações que devem ser realizadas. Certifique-se de seguir estritamente o formato fornecido para a tradução para o português (pt-br). \n\nSiga o formato abaixo para sua resposta:\n\n\"Resumo\":\n01. \"Ponto 1\": \"Ação 1\"\n02. \"Ponto 2\": \"Ação 2\"\n03. \"Ponto 3\": \"Ação 3\"\n\nInput Data: {{ $json.data.toJsonString() }}\n"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        880,
+        0
+      ],
+      "id": "e7fb0840-13d5-47e4-9ad2-03d258ca6b7b",
+      "name": "Basic LLM Chain"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Trigger semanal": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Organize Email Data - Morning": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Organize Email Data - Morning",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Send Email Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "732f0320-0870-4abc-bee0-37e8818fe7f9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3f26d38a4526d05c42460bb8fca53dd222dc84f1728b3f988b64d303173a5b84"
+  },
+  "id": "VqVUpexYq0jhyqEJ",
+  "tags": []
+}

@@ -1,0 +1,202 @@
+{
+  "name": "Mandar resposta automatica emaik",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.Subject }}",
+              "operation": "contains",
+              "value2": "N8N"
+            }
+          ]
+        }
+      },
+      "id": "fd23ee81-187d-4286-8227-895b01ab4fee",
+      "name": "Check Subject (HDeep)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        520,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "subject": "Re: HDeep",
+        "message": "={{$json[\"choices\"][0][\"message\"][\"content\"]}}",
+        "toList": [
+          "={{ $node[\"Gmail Trigger1\"].json[\"From\"].match(/<(.+)>/)[1] }}"
+        ],
+        "additionalFields": {}
+      },
+      "id": "e7ece8f4-64fc-4546-8955-3716c71af695",
+      "name": "Send Email Response (HDeep)",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 1,
+      "position": [
+        1400,
+        300
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "hlFaSOGDc5JTvOys",
+          "name": "Gmail account 14"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://drive.google.com/uc?export=download&id=1HQbXM7zrJBxm2lizg9WUao4h60796kiA",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        740,
+        300
+      ],
+      "id": "24a1f07b-dfed-4af1-94e0-3e847e5dcd38",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "id": "922e5916-4b1a-4fb6-8d8d-4606fe7c5677",
+      "name": "Gmail Trigger1",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1,
+      "position": [
+        300,
+        300
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "hlFaSOGDc5JTvOys",
+          "name": "Gmail account 14"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "requestMethod": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={{ \nJSON.stringify({\n  model: \"llama3-8b-8192\",\n  messages: [\n    {\n      role: \"system\",\n      content: \"Você é um assistente que responde perguntas sobre o paper Projeto Final_MS_2025_1.\"\n    },\n    {\n      role: \"user\",\n      content: `<<inicio documento>>\\n${$json.text}\\n<<fim documento>>\\n<<inicio tarefa>>\\nSobre o documento contido entre as tags \"inicio documento\" e \"fim documento dadas acima\" resposta a seguinte pergunta: <<inicio pergunta>>\\n${$(\"Check Subject (HDeep)\").item.json.snippet} \\n<<fim pergunta>>\\n<<fim tarefa>>`\n    }\n  ],\n  temperature: 0.7\n})\n}}",
+        "headerParametersJson": "=",
+        "queryParametersJson": "="
+      },
+      "id": "4698ec33-483d-4c8b-afad-0f35d7366b68",
+      "name": "Call Groq (Plano de ensino)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        1180,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "O9q0USjJDS2ltUQi",
+          "name": "Header Auth account 16"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        960,
+        300
+      ],
+      "id": "3eb47b62-fae7-46d7-af1c-8b6afcfcf976",
+      "name": "Extract from File"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Check Subject (HDeep)": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Check Subject (HDeep)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Groq (Plano de ensino)": {
+      "main": [
+        [
+          {
+            "node": "Send Email Response (HDeep)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Call Groq (Plano de ensino)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "ad9956ff-d3a0-4693-b141-b0a5444f7819",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3f26d38a4526d05c42460bb8fca53dd222dc84f1728b3f988b64d303173a5b84"
+  },
+  "id": "Ye5Fw8jeOI8m9nN6",
+  "tags": []
+}

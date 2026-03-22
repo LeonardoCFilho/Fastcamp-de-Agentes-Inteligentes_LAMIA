@@ -2,3 +2,5 @@
 **/temp/
 **/docker_local/
 # **/.env # Deveria ser verdade, mas como a ideia é aprendizado os .env serão públicos, chaves usadas terão validade (se possível de no mínimo de 90 dias)
+**/__pycache__/
+**/.adk/

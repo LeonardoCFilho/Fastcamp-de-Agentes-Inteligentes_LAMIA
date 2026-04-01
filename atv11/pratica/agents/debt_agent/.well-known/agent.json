@@ -1,0 +1,4 @@
+{
+    "name": "debt_agent",
+    "description": "Agent providing debt payoff strategies based on income, expenses, and total debt."
+  }
